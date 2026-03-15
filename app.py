@@ -1,4 +1,7 @@
 import os
+print(os.environ.get("DB_USER"))
+print(os.environ.get("DB_PASSWORD"))
+print(os.environ.get("DB_DSN"))
 import oracledb
 from flask import Flask, render_template, redirect
 
@@ -63,4 +66,28 @@ def processar():
     conn.close()
 
     return redirect("/")
-    
+
+@app.route('/resetar')
+def resetar():
+
+    bloco_plsql_reset = """
+    BEGIN
+        UPDATE TB_HEROIS -- Reseta os heróis para o estado inicial
+        SET hp_atual = hp_max,
+            status = 'ATIVO';
+        COMMIT;
+    END;
+    """
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(bloco_plsql_reset)
+
+    cursor.close()
+    conn.close()
+
+    return redirect("/")
+
+if __name__ == '__main__':
+    app.run()

@@ -1,4 +1,6 @@
 
+-- Processo de turno aplicando dano e verificando status dos heróis.
+
 DECLARE
     v_dano_nevoa NUMBER := 10; -- Dano causado pela névoa
 BEGIN
@@ -20,5 +22,14 @@ BEGIN
         
     END LOOP;
 
+    COMMIT;
+END;
+
+
+-- Processo de resetar os heróis para o estado inicial.
+BEGIN
+    UPDATE TB_HEROIS -- Reseta os heróis para o estado inicial
+    SET hp_atual = hp_max,
+        status = 'ATIVO';
     COMMIT;
 END;
