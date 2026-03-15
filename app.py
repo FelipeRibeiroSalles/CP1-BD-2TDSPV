@@ -1,7 +1,7 @@
 import os
-print(os.environ.get("DB_USER"))
-print(os.environ.get("DB_PASSWORD"))
-print(os.environ.get("DB_DSN"))
+#print(os.environ.get("DB_USER"))
+#print(os.environ.get("DB_PASSWORD"))
+#print(os.environ.get("DB_DSN"))
 import oracledb
 from flask import Flask, render_template, redirect
 
